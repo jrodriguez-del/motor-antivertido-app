@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.env
+.git
+*.csv
+*.xlsx
+*.xml
+*.resolved
+*.md
+!README.md
+!requirements.txt
