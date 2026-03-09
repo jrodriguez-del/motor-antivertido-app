@@ -660,7 +660,7 @@ if "resultados" in st.session_state:
 
         st.caption(f"Archivo con {n:,} registros cuartohorarios · "
                    f"Columnas: Fecha, Consumo_Red, Gen_Teorica, Autoconsumo, "
-                   f"Excedente_Capado, Demanda_Real")
+                   f"Excedente_Capado, Demanda_Real (kWh y kW)")
 
 
 if "resultados" not in st.session_state and not calcular:

@@ -58,17 +58,39 @@ def generar_csv_salida(
         "Autoconsumo_Solar_kWh",
         "Excedente_Capado_kWh",
         "Demanda_Real_kWh",
+        "Consumo_Red_kW",
+        "Generacion_Teorica_kW",
+        "Autoconsumo_Solar_kW",
+        "Excedente_Capado_kW",
+        "Demanda_Real_kW",
     ])
 
     for i in range(len(timestamps)):
         fecha_str = timestamps[i].strftime("%d/%m/%Y %H:%M")
+        # Energía (kWh cada 15 min)
+        c_red_kwh = c_red_15m[i]
+        g_teo_kwh = g_teo_15m[i]
+        auto_kwh = autoconsumo[i]
+        exc_kwh = excedente_capado[i]
+        dem_kwh = consumo_real[i]
+        # Potencia (kW) = kWh * 4  (cada intervalo son 15 min = 1/4 h)
+        c_red_kw = c_red_kwh * 4
+        g_teo_kw = g_teo_kwh * 4
+        auto_kw = auto_kwh * 4
+        exc_kw = exc_kwh * 4
+        dem_kw = dem_kwh * 4
         writer.writerow([
             fecha_str,
-            f"{c_red_15m[i]:.4f}".replace(".", ","),
-            f"{g_teo_15m[i]:.4f}".replace(".", ","),
-            f"{autoconsumo[i]:.4f}".replace(".", ","),
-            f"{excedente_capado[i]:.4f}".replace(".", ","),
-            f"{consumo_real[i]:.4f}".replace(".", ","),
+            f"{c_red_kwh:.4f}".replace(".", ","),
+            f"{g_teo_kwh:.4f}".replace(".", ","),
+            f"{auto_kwh:.4f}".replace(".", ","),
+            f"{exc_kwh:.4f}".replace(".", ","),
+            f"{dem_kwh:.4f}".replace(".", ","),
+            f"{c_red_kw:.4f}".replace(".", ","),
+            f"{g_teo_kw:.4f}".replace(".", ","),
+            f"{auto_kw:.4f}".replace(".", ","),
+            f"{exc_kw:.4f}".replace(".", ","),
+            f"{dem_kw:.4f}".replace(".", ","),
         ])
 
     return output.getvalue()
